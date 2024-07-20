@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p188:cmLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+    xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    xmlns:p188="http://schemas.microsoft.com/office/powerpoint/2018/8/main">
+    <p188:cm id="{BA98C557-F1E2-459C-967B-D7D89E14B100}"
+        authorId="{ED181FB3-E6D1-F4DB-C37A-E82A0F5BE2CC}" created="2024-07-20T18:29:13.221">
+        <pc:sldMkLst xmlns:pc="http://schemas.microsoft.com/office/powerpoint/2013/main/command">
+            <pc:docMk />
+            <pc:sldMk cId="3020581123" sldId="257" />
+        </pc:sldMkLst>
+        <p188:txBody>
+            <a:bodyPr />
+            <a:lstStyle />
+            <a:p>
+                <a:r>
+                    <a:rPr lang="en-US" />
+                    <a:t>Slide 2 comment</a:t>
+                </a:r>
+            </a:p>
+        </p188:txBody>
+    </p188:cm>
+</p188:cmLst>
