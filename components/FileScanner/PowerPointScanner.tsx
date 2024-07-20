@@ -6,6 +6,14 @@ import { parseString } from "xml2js";
 
 const PPTXTextExtractor = () => {
   const [textData, setTextData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
+  const classificationMarkings = [
+    "CONFIDENTIAL",
+    "SECRET",
+    "TOP SECRET",
+    // Add more classification markings as needed
+  ];
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -41,20 +49,6 @@ const PPTXTextExtractor = () => {
               slideIdMapping,
               slideNumber
             );
-
-            // Extract relationship ID for comments
-            const relFilename =
-              filename.replace("slides/slide", "slides/_rels/slide") + ".rels";
-            if (content.files[relFilename]) {
-              const relXmlContent = await content.files[relFilename].async(
-                "text"
-              );
-              await extractSlideIdMapping(
-                relXmlContent,
-                slideIdMapping,
-                slideNumber
-              );
-            }
           }
         }
 
@@ -89,6 +83,12 @@ const PPTXTextExtractor = () => {
         }
 
         setTextData({ presentationDetails, slides: extractedData });
+
+        // Filter extracted data based on classification markings
+        const filteredData = extractedData.filter((entry) =>
+          classificationMarkings.some((marking) => entry.text.includes(marking))
+        );
+        setFilteredData(filteredData);
       } catch (error) {
         console.error("Error reading PPTX file:", error);
       }
@@ -227,32 +227,9 @@ const PPTXTextExtractor = () => {
         } else {
           const extLst = result["p:sld"]["p:cSld"][0]["p:extLst"] || [];
           extLst.forEach((ext) => {
-            if (ext["p14:creationId"]) {
-              const commentId = ext["p14:creationId"][0]["$"]["val"];
+            if (ext["p:ext"][0]["p14:creationId"][0].$.val) {
+              const commentId = ext["p:ext"][0]["p14:creationId"][0].$.val;
               slideIdMapping[commentId] = slideNumber;
-            }
-          });
-          resolve();
-        }
-      });
-    });
-  };
-
-  const extractSlideIdMapping = async (
-    relXmlContent,
-    slideIdMapping,
-    slideNumber
-  ) => {
-    return new Promise((resolve, reject) => {
-      parseString(relXmlContent, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          const relationships = result["Relationships"]["Relationship"] || [];
-          relationships.forEach((relationship) => {
-            if (relationship["$"]["Type"].includes("comments")) {
-              const relId = relationship["$"]["Id"];
-              slideIdMapping[relId] = slideNumber;
             }
           });
           resolve();
@@ -274,12 +251,19 @@ const PPTXTextExtractor = () => {
             const cId = comment["pc:sldMkLst"][0]["pc:sldMk"][0]["$"]["cId"];
             const text =
               comment["p188:txBody"][0]["a:p"][0]["a:r"][0]["a:t"][0];
+            const language =
+              comment["p188:txBody"][0]["a:p"][0]["a:r"][0]["a:rPr"][0].$.lang;
+            const created = comment.$.created;
+            const author = comment.$.authorId;
             const slideNumber = slideIdMapping[cId];
             if (text && slideNumber !== undefined) {
               commentsTextData.push({
                 slideNumber,
                 type: "comment",
                 text,
+                author,
+                created,
+                language,
               });
             }
           });
@@ -292,7 +276,7 @@ const PPTXTextExtractor = () => {
   return (
     <div>
       <input type="file" accept=".pptx" onChange={handleFileChange} />
-      <pre>{JSON.stringify(textData, null, 2)}</pre>
+      <pre>{JSON.stringify(filteredData, null, 2)}</pre>
     </div>
   );
 };
