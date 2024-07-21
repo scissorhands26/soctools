@@ -471,7 +471,7 @@ const PPTXTextExtractor = () => {
   return (
     <div>
       <div>
-        <h2 className="text-4xl">PowerPoint Scannner</h2>
+        <h2 className="text-4xl mb-2">PowerPoint Scannner</h2>
       </div>
       <Input
         type="file"
