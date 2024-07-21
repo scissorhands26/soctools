@@ -561,7 +561,7 @@ const PPTXTextExtractor = () => {
                       <strong>Hit on:</strong>{" "}
                       <span className="text-red-500">{hitWord || "None"}</span>
                     </p>
-                    <p>"{entry.text}"</p>
+                    <p>&quot;{entry.text}&quot;</p>
                   </CardContent>
                   <CardFooter>
                     <div className="grid grid-cols-3 gap-2 border w-full text-center">
