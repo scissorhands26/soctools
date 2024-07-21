@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<p188:authorLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p188="http://schemas.microsoft.com/office/powerpoint/2018/8/main"><p188:author id="{ED181FB3-E6D1-F4DB-C37A-E82A0F5BE2CC}" name="Ryan Scissons" initials="RS" userId="ae022af6cf6bef24" providerId="Windows Live"/></p188:authorLst>
+<p188:authorLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+    xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    xmlns:p188="http://schemas.microsoft.com/office/powerpoint/2018/8/main">
+    <p188:author id="{ED181FB3-E6D1-F4DB-C37A-E82A0F5BE2CC}" name="Ryan Scissons" initials="RS"
+        userId="ae022af6cf6bef24" providerId="Windows Live" />
+</p188:authorLst>
