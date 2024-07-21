@@ -59,8 +59,6 @@ const PPTXTextExtractor = () => {
   const [filterType, setFilterType] = useState<string>("");
   const [customFilter, setCustomFilter] = useState<string>("");
   const [caseInsensitive, setCaseInsensitive] = useState<boolean>(false);
-  const [presentationDetails, setPresentationDetails] =
-    useState<PresentationDetails>({});
 
   const classificationMarkings = [
     "UNCLASSIFIED",
@@ -131,7 +129,6 @@ const PPTXTextExtractor = () => {
 
         // Extract presentation details
         const presentationDetails = await extractPresentationDetails(content);
-        setPresentationDetails(presentationDetails);
 
         // Extract text from all relevant parts of the PPTX
         const extractedData: ExtractedData[] = [];
@@ -470,51 +467,65 @@ const PPTXTextExtractor = () => {
       />
       <div>
         <Label>Select Filter Type:</Label>
-        <div className="flex flex-row justify-between text-center">
-          <Select value={filterType} onValueChange={(e) => setFilterType(e)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a filter" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="classification">
-                Classification Markings
-              </SelectItem>
-              <SelectItem value="profanity">Profanity</SelectItem>
-              <SelectItem value="custom">Custom Filter</SelectItem>
-            </SelectContent>
-          </Select>
-          {filterType === "custom" && (
+        <div className="flex flex-col text-center">
+          <div className="flex flex-row justify-between">
+            <Select value={filterType} onValueChange={(e) => setFilterType(e)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a filter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="classification">
+                  Classification Markings
+                </SelectItem>
+                <SelectItem value="profanity">Profanity</SelectItem>
+                <SelectItem value="custom">Custom Filter</SelectItem>
+              </SelectContent>
+            </Select>
             <div>
               <Label>
-                Custom Filter (comma-separated):
-                <Input
-                  type="text"
-                  value={customFilter}
-                  onChange={(e) => setCustomFilter(e.target.value)}
+                <input
+                  type="checkbox"
+                  checked={caseInsensitive}
+                  onChange={(e) => setCaseInsensitive(e.target.checked)}
                 />
+                Case Insensitive
               </Label>
             </div>
-          )}
+          </div>
           <div>
-            <Label>
-              <input
-                type="checkbox"
-                checked={caseInsensitive}
-                onChange={(e) => setCaseInsensitive(e.target.checked)}
-              />
-              Case Insensitive
-            </Label>
+            {filterType === "custom" && (
+              <div>
+                <Label>
+                  Custom Filter (comma-separated):
+                  <Input
+                    type="text"
+                    value={customFilter}
+                    onChange={(e) => setCustomFilter(e.target.value)}
+                  />
+                </Label>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      {filteredData.length > 0 && (
+      {filteredData.length > 0 ? (
         <div className="my-4">
           {filteredData.map((entry, index) => (
             <Card key={index} className="mb-2">
               <CardHeader>
                 <CardTitle className="flex flex-row justify-between">
                   <span>Slide {entry.slideNumber}</span>
-                  <span className="text-lg">({entry.type})</span>
+                  <span className="text-lg">
+                    (
+                    {entry.type === "slideText"
+                      ? "Slide Text"
+                      : entry.type === "note"
+                      ? "Note"
+                      : entry.type === "comment"
+                      ? "Comment"
+                      : "Unknown"}
+                    )
+                  </span>
                 </CardTitle>
                 <CardDescription></CardDescription>
               </CardHeader>
@@ -532,6 +543,10 @@ const PPTXTextExtractor = () => {
               </CardFooter>
             </Card>
           ))}
+        </div>
+      ) : (
+        <div>
+          <p>No data found</p>
         </div>
       )}
     </div>
