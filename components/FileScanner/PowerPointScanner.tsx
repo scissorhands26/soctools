@@ -454,6 +454,20 @@ const PPTXTextExtractor = () => {
     return "Unknown";
   }
 
+  const findHitWord = (
+    text: string,
+    filterCriteria: string[],
+    caseInsensitive: boolean
+  ): string | null => {
+    for (const criteria of filterCriteria) {
+      const regex = new RegExp(`(${criteria})`, caseInsensitive ? "i" : "g");
+      if (regex.test(text)) {
+        return criteria;
+      }
+    }
+    return null;
+  };
+
   return (
     <div>
       <div>
@@ -508,47 +522,62 @@ const PPTXTextExtractor = () => {
           </div>
         </div>
       </div>
-      {filteredData.length > 0 ? (
-        <div className="my-4">
-          {filteredData.map((entry, index) => (
-            <Card key={index} className="mb-2">
-              <CardHeader>
-                <CardTitle className="flex flex-row justify-between">
-                  <span>Slide {entry.slideNumber}</span>
-                  <span className="text-lg">
-                    (
-                    {entry.type === "slideText"
-                      ? "Slide Text"
-                      : entry.type === "note"
-                      ? "Note"
-                      : entry.type === "comment"
-                      ? "Comment"
-                      : "Unknown"}
-                    )
-                  </span>
-                </CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>
-                  <strong>Hit on:</strong> {entry.text}
-                </p>
-              </CardContent>
-              <CardFooter>
-                <div className="grid grid-cols-3 gap-2 border w-full text-center">
-                  <div>Author: {entry.author}</div>
-                  <div>Created: {entry.created}</div>
-                  <div>Language: {entry.language}</div>
-                </div>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      ) : (
-        <div>
-          <p>No data found</p>
-        </div>
-      )}
+      <div>
+        {filteredData.length > 0 ? (
+          <div className="my-4">
+            {filteredData.map((entry, index) => {
+              const hitWord = findHitWord(
+                entry.text,
+                filterType === "classification"
+                  ? classificationMarkings
+                  : filterType === "profanity"
+                  ? profanityList
+                  : filterType === "custom" && customFilter
+                  ? customFilter.split(",").map((item) => item.trim())
+                  : [],
+                caseInsensitive
+              );
+              return (
+                <Card key={index} className="mb-2">
+                  <CardHeader>
+                    <CardTitle className="flex flex-row justify-between">
+                      <span>Slide {entry.slideNumber}</span>
+                      <span className="text-lg">
+                        (
+                        {entry.type === "slideText"
+                          ? "Slide Text"
+                          : entry.type === "note"
+                          ? "Note"
+                          : entry.type === "comment"
+                          ? "Comment"
+                          : "Unknown"}
+                        )
+                      </span>
+                    </CardTitle>
+                    <CardDescription></CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>
+                      <strong>Hit on:</strong>{" "}
+                      <span className="text-red-500">{hitWord || "None"}</span>
+                    </p>
+                    <p>"{entry.text}"</p>
+                  </CardContent>
+                  <CardFooter>
+                    <div className="grid grid-cols-3 gap-2 border w-full text-center">
+                      <div>Author: {entry.author}</div>
+                      <div>Created: {entry.created}</div>
+                      <div>Language: {entry.language}</div>
+                    </div>
+                  </CardFooter>
+                </Card>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-center">No hits found</div>
+        )}
+      </div>
     </div>
   );
 };
