@@ -20,6 +20,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 interface ExtractedData {
   slideNumber: number;
@@ -479,6 +481,7 @@ const PPTXTextExtractor = () => {
         onChange={handleFileChange}
         className="bg-white text-black"
       />
+
       <div>
         <Label>Select Filter Type:</Label>
         <div className="flex flex-col text-center">
@@ -577,6 +580,11 @@ const PPTXTextExtractor = () => {
         ) : (
           <div className="text-center">No hits found</div>
         )}
+        <div className="mt-5 w-full">
+          <Link href="/test_files/powerpoint.pptx" target="_blank" download>
+            <Button className="w-full">Download Sample PowerPoint</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
