@@ -21,48 +21,6 @@ import {
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
-      <header className="bg-slate-950 text-white py-6 px-4 md:px-6">
-        <div className="container flex items-center justify-between">
-          <Link href="#" className="flex items-center gap-2" prefetch={false}>
-            <ShieldIcon className="w-6 h-6" />
-            <span className="text-xl font-bold">SOC Toolkit</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-4">
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline"
-              prefetch={false}
-            >
-              Features
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline"
-              prefetch={false}
-            >
-              Apps
-            </Link>
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline"
-              prefetch={false}
-            >
-              Resources
-            </Link>
-            <Link
-              href="#"
-              className="inline-flex h-9 items-center justify-center rounded-md bg-primary-foreground px-4 py-2 text-sm font-medium text-primary shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-              prefetch={false}
-            >
-              Get Started
-            </Link>
-          </nav>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <MenuIcon className="w-6 h-6" />
-            <span className="sr-only">Toggle menu</span>
-          </Button>
-        </div>
-      </header>
       <main className="flex-1">
         <section id="hero" className="bg-black py-12 md:py-24 lg:py-32">
           <div className="container grid gap-8 md:grid-cols-2 items-center">
@@ -101,7 +59,7 @@ export default function HomePage() {
             />
           </div>
         </section>
-        <section id="features" className="py-12 md:py-24 lg:py-32">
+        {/* <section id="features" className="py-12 md:py-24 lg:py-32">
           <div className="container space-y-12">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -163,7 +121,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <section id="apps" className="bg-muted py-12 md:py-24 lg:py-32">
           <div className="container space-y-12">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -180,23 +138,23 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Incident Response Manager</CardTitle>
+                  <CardTitle>PowerPoint Scanner</CardTitle>
                   <CardDescription>
-                    A comprehensive tool for managing security incidents, from
-                    detection to resolution.
+                    Scan through PowerPoint files with a word list and see what
+                    slides get hits.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2">
                     <ShieldIcon className="w-6 h-6 text-primary" />
                     <span className="text-sm font-medium">
-                      Incident Response
+                      PowerPoint Scanner
                     </span>
                   </div>
                 </CardContent>
                 <CardFooter>
                   <Link
-                    href="#"
+                    href="apps/powerpointscanner"
                     className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
@@ -204,7 +162,7 @@ export default function HomePage() {
                   </Link>
                 </CardFooter>
               </Card>
-              <Card>
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>Threat Intelligence Hub</CardTitle>
                   <CardDescription>
@@ -227,8 +185,8 @@ export default function HomePage() {
                     Launch App
                   </Link>
                 </CardFooter>
-              </Card>
-              <Card>
+              </Card> */}
+              {/* <Card>
                 <CardHeader>
                   <CardTitle>Security Automation Toolkit</CardTitle>
                   <CardDescription>
@@ -251,7 +209,7 @@ export default function HomePage() {
                     Launch App
                   </Link>
                 </CardFooter>
-              </Card>
+              </Card> */}
             </div>
           </div>
         </section>
@@ -347,24 +305,6 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-      <footer className="bg-black text-white py-6 px-4 md:px-6">
-        <div className="container flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm">
-            &copy; 2024 SOC Toolkit. All rights reserved.
-          </p>
-          <nav className="flex items-center gap-4 mt-4 md:mt-0">
-            <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Privacy
-            </Link>
-            <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Terms
-            </Link>
-            <Link href="#" className="text-sm hover:underline" prefetch={false}>
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </footer>
     </div>
   );
 }
