@@ -486,7 +486,10 @@ const PPTXTextExtractor = () => {
         <Label>Select Filter Type:</Label>
         <div className="flex flex-col text-center">
           <div className="flex flex-row justify-between">
-            <Select value={filterType} onValueChange={(e) => setFilterType(e)}>
+            <Select
+              value={filterType}
+              onValueChange={(e: any) => setFilterType(e)}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select a filter" />
               </SelectTrigger>
