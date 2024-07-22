@@ -27,7 +27,7 @@ export default function HomePage() {
           <div className="container grid gap-8 md:grid-cols-2 items-center">
             <div className="space-y-4">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Empower Your SOC with Our Toolkit
+                Empower Your SOC with Our Tools and Links
               </h1>
               <p className="text-muted-foreground md:text-xl">
                 Discover a curated collection of web applications and resources

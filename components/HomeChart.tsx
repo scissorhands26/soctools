@@ -19,11 +19,11 @@ import {
 } from "@/components/ui/chart";
 
 const chartData = [
-  { month: "Then", productivity: 78 },
-  { month: "", productivity: 123 },
-  { month: "", productivity: 90 },
-  { month: "", productivity: 165 },
-  { month: "Now", productivity: 200 },
+  { time: "Then", productivity: 78 },
+  { time: "", productivity: 123 },
+  { time: "", productivity: 90 },
+  { time: "", productivity: 165 },
+  { time: "Now", productivity: 200 },
 ];
 
 const chartConfig = {
@@ -46,17 +46,16 @@ export function HomeChart() {
             accessibilityLayer
             data={chartData}
             margin={{
-              left: 12,
-              right: 12,
+              left: 20,
             }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="time"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value}
             />
             <ChartTooltip
               cursor={false}
