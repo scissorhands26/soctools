@@ -17,6 +17,7 @@ import {
   TargetIcon,
   VideoIcon,
 } from "lucide-react";
+import { HomeChart } from "@/components/HomeChart";
 
 export default function HomePage() {
   return (
@@ -50,13 +51,9 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <img
-              src="/placeholder.svg"
-              width={600}
-              height={400}
-              alt="Hero Image"
-              className="mx-auto rounded-lg"
-            />
+            <div>
+              <HomeChart />
+            </div>
           </div>
         </section>
         {/* <section id="features" className="py-12 md:py-24 lg:py-32">
