@@ -1,4 +1,4 @@
-import PowerPointScanner from "@/components/FileScanner/PowerPointScanner";
+import PowerPointScanner from "@/components/tools/PowerPointScanner";
 
 export default async function PowerPointScannerPage() {
   return (
