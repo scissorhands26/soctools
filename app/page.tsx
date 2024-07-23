@@ -159,6 +159,29 @@ export default function HomePage() {
                   </Link>
                 </CardFooter>
               </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>File Examiner</CardTitle>
+                  <CardDescription>
+                    Examine files for metadata, hashes, and other information.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-2">
+                    <ShieldIcon className="w-6 h-6 text-primary" />
+                    <span className="text-sm font-medium">File Examiner</span>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Link
+                    href="apps/fileexaminer"
+                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                    prefetch={false}
+                  >
+                    Launch App
+                  </Link>
+                </CardFooter>
+              </Card>
               {/* <Card>
                 <CardHeader>
                   <CardTitle>Threat Intelligence Hub</CardTitle>

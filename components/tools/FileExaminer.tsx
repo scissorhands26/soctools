@@ -1,71 +1,133 @@
 "use client";
 
-import React, { useState } from "react";
+import { UploadIcon } from "lucide-react";
+import { useState, ChangeEvent, DragEvent } from "react";
 
-export default function FileUpload() {
-  const [fileInfo, setFileInfo] = useState(null);
+interface FileMetadata {
+  name: string;
+  size: number;
+  type: string;
+  lastModified: string;
+  sha1: string;
+  sha256: string;
+  sha512: string;
+}
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+export default function FileExaminer() {
+  const [file, setFile] = useState<File | null>(null);
+  const [fileMetadata, setFileMetadata] = useState<FileMetadata | null>(null);
 
-    const arrayBuffer = await file.arrayBuffer();
+  const handleDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const droppedFile = event.dataTransfer.files[0];
+    setFile(droppedFile);
+    calculateFileMetadata(droppedFile);
+  };
 
-    // Calculate hashes using Web Crypto API
-    const md5Hash = await hashFile(arrayBuffer, "MD5");
-    const sha1Hash = await hashFile(arrayBuffer, "SHA-1");
-    const sha256Hash = await hashFile(arrayBuffer, "SHA-256");
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      calculateFileMetadata(selectedFile);
+    }
+  };
 
-    // Get file metadata
+  const calculateFileMetadata = async (file: File) => {
     const metadata = {
       name: file.name,
       size: file.size,
       type: file.type,
-      lastModified: file.lastModified,
-      lastModifiedDate: file.lastModifiedDate.toString(),
-      md5Hash,
-      sha1Hash,
-      sha256Hash,
+      lastModified: new Date(file.lastModified).toLocaleString(),
+      sha1: await calculateHash(file, "SHA-1"),
+      sha256: await calculateHash(file, "SHA-256"),
+      sha512: await calculateHash(file, "SHA-512"),
     };
-
-    setFileInfo(metadata);
+    setFileMetadata(metadata);
   };
 
-  const hashFile = async (arrayBuffer, algorithm) => {
-    const hashBuffer = await crypto.subtle.digest(algorithm, arrayBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  const calculateHash = async (
+    file: File,
+    algorithm: string
+  ): Promise<string> => {
+    const buffer = await file.arrayBuffer();
+    const hash = await crypto.subtle.digest(algorithm, buffer);
+    return toHexString(hash);
+  };
+
+  const toHexString = (buffer: ArrayBuffer): string => {
+    return Array.from(new Uint8Array(buffer))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
-      {fileInfo && (
-        <div>
-          <h3>File Information:</h3>
-          <p>
-            <strong>Name:</strong> {fileInfo.name}
-          </p>
-          <p>
-            <strong>Size:</strong> {fileInfo.size} bytes
-          </p>
-          <p>
-            <strong>Type:</strong> {fileInfo.type}
-          </p>
-          <p>
-            <strong>Last Modified:</strong> {fileInfo.lastModifiedDate}
-          </p>
-          <p>
-            <strong>MD5 Hash:</strong> {fileInfo.md5Hash}
-          </p>
-          <p>
-            <strong>SHA-1 Hash:</strong> {fileInfo.sha1Hash}
-          </p>
-          <p>
-            <strong>SHA-256 Hash:</strong> {fileInfo.sha256Hash}
-          </p>
-        </div>
-      )}
+    <div className="flex flex-col items-center justify-center">
+      <div
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={handleDrop}
+        className="w-full max-w-md p-8 bg-slate-950 rounded-lg shadow-md border border-slate-900 flex flex-col items-center justify-center"
+      >
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="hidden"
+          id="fileInput"
+        />
+        <label
+          htmlFor="fileInput"
+          className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+        >
+          {file ? (
+            <div className="w-full">
+              <h2 className="text-2xl font-bold mb-4">File Metadata</h2>
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <p className="text-gray-300 font-medium">Name:</p>
+                  <p className="text-white">{fileMetadata?.name}</p>
+                </div>
+                <div>
+                  <p className="text-gray-300 font-medium">Size:</p>
+                  <p className="text-white">
+                    {/* @ts-ignore */}
+                    {(fileMetadata?.size / 1024).toFixed(2)} KB
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-300 font-medium">Type:</p>
+                  <p className="text-white">
+                    {fileMetadata?.type ? fileMetadata?.type : "Unknown"}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-300 font-medium">Last Modified:</p>
+                  <p className="text-white">{fileMetadata?.lastModified}</p>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <p className="text-gray-300 font-medium">SHA1:</p>
+                  <p className="text-white break-all">{fileMetadata?.sha1}</p>
+                </div>
+                <div>
+                  <p className="text-gray-300 font-medium">SHA256:</p>
+                  <p className="text-white break-all">{fileMetadata?.sha256}</p>
+                </div>
+                <div>
+                  <p className="text-gray-300 font-medium">SHA512:</p>
+                  <p className="text-white break-all">{fileMetadata?.sha512}</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center">
+              <UploadIcon className="h-12 w-12 text-gray-400 mb-4" />
+              <p className="text-gray-300 font-medium">
+                Drag and drop a file here or click to browse
+              </p>
+            </div>
+          )}
+        </label>
+      </div>
     </div>
   );
 }

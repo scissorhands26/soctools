@@ -27,6 +27,13 @@ export default function AppsPage() {
       ],
       icon: ShieldIcon,
     },
+    {
+      name: "File Examiner",
+      description: "Examine files for metadata, hashes, and other information.",
+      href: "apps/fileexaminer",
+      tags: ["File", "Metadata", "Hash", "Client-Side"],
+      icon: ShieldIcon,
+    },
   ];
 
   return (
