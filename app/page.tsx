@@ -137,8 +137,8 @@ export default function HomePage() {
                 <CardHeader>
                   <CardTitle>PowerPoint Scanner</CardTitle>
                   <CardDescription>
-                    Scan through PowerPoint files with a word list and see what
-                    slides get hits.
+                    Scan PowerPoint files for classified markings, sensitive
+                    information, or a custom wordlist.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

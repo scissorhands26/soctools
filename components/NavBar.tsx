@@ -8,7 +8,7 @@ export default function NavBar() {
   return (
     <header className="bg-slate-950 text-white py-6 px-4 md:px-6">
       <div className="container flex items-center justify-between">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <ShieldIcon className="w-6 h-6" />
           <span className="text-xl font-bold">SOC Tools</span>
         </Link>
