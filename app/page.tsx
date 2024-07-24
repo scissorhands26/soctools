@@ -182,6 +182,30 @@ export default function HomePage() {
                   </Link>
                 </CardFooter>
               </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>PDF Extractor</CardTitle>
+                  <CardDescription>
+                    Extract metadata from PDF files, examine links, and extract
+                    text and images.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-2">
+                    <ShieldIcon className="w-6 h-6 text-primary" />
+                    <span className="text-sm font-medium">PDF Extractor</span>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Link
+                    href="apps/pdfextractor"
+                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                    prefetch={false}
+                  >
+                    Launch App
+                  </Link>
+                </CardFooter>
+              </Card>
               {/* <Card>
                 <CardHeader>
                   <CardTitle>Threat Intelligence Hub</CardTitle>
