@@ -2,7 +2,8 @@
 
 import { UploadIcon } from "lucide-react";
 import { useState, ChangeEvent, DragEvent } from "react";
-import * as pdfjsLib from "pdfjs-dist";
+// @ts-ignore
+import * as pdfjsLib from "pdfjs-dist/webpack";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.js";
 
@@ -22,26 +23,9 @@ interface PDFMetadata {
   Producer?: string;
 }
 
-interface PDFInfo {
-  PDFFormatVersion?: string;
-  Language?: string;
-  EncryptFilterName?: string;
-  IsLinearized?: string;
-  IsAcroFormPresent?: string;
-  IsXFAPresent?: string;
-  IsCollectionPresent?: string;
-  IsSignaturesPresent?: string;
-  Author?: string;
-  Creator?: string;
-  CreationDate?: string;
-  ModDate?: string;
-  Producer?: string;
-}
-
 export default function PDFMetadataExtractor() {
   const [file, setFile] = useState<File | null>(null);
   const [pdfMetadata, setPDFMetadata] = useState<PDFMetadata | null>(null);
-  const [rawData, setRawData] = useState<any | null>(null);
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -68,45 +52,41 @@ export default function PDFMetadataExtractor() {
   const convertTimestamp = (timestamp: string | undefined): string => {
     if (!timestamp) {
       return "";
-    } else {
-      const year = timestamp.substring(2, 6);
-      const month = timestamp.substring(6, 8);
-      const day = timestamp.substring(8, 10);
-      const hours = timestamp.substring(10, 12);
-      const minutes = timestamp.substring(12, 14);
-      const seconds = timestamp.substring(14, 16);
-      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
+    const year = timestamp.substring(2, 6);
+    const month = timestamp.substring(6, 8);
+    const day = timestamp.substring(8, 10);
+    const hours = timestamp.substring(10, 12);
+    const minutes = timestamp.substring(12, 14);
+    const seconds = timestamp.substring(14, 16);
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   };
 
   const extractPDFMetadata = async (file: File) => {
     const reader = new FileReader();
     reader.onload = async () => {
       const typedArray = new Uint8Array(reader.result as ArrayBuffer);
-      const pdf = await pdfjsLib.getDocument(typedArray).promise;
-      const metadata = await pdf.getMetadata();
-      const rawData = {
-        metadata: metadata,
-      };
-      setRawData(rawData);
-
-      const info = metadata?.info as PDFInfo;
-
-      setPDFMetadata({
-        PDFFormatVersion: info.PDFFormatVersion,
-        Language: info.Language,
-        EncryptFilterName: info.EncryptFilterName,
-        IsLinearized: info.IsLinearized,
-        IsAcroFormPresent: info.IsAcroFormPresent,
-        IsXFAPresent: info.IsXFAPresent,
-        IsCollectionPresent: info.IsCollectionPresent,
-        IsSignaturesPresent: info.IsSignaturesPresent,
-        Author: info.Author,
-        Creator: info.Creator,
-        CreationDate: info.CreationDate,
-        ModDate: info.ModDate,
-        Producer: info.Producer,
-      });
+      try {
+        const pdf = await pdfjsLib.getDocument(typedArray).promise;
+        const { info } = await pdf.getMetadata();
+        setPDFMetadata({
+          PDFFormatVersion: info.PDFFormatVersion,
+          Language: info.Language,
+          EncryptFilterName: info.EncryptFilterName,
+          IsLinearized: info.IsLinearized,
+          IsAcroFormPresent: info.IsAcroFormPresent,
+          IsXFAPresent: info.IsXFAPresent,
+          IsCollectionPresent: info.IsCollectionPresent,
+          IsSignaturesPresent: info.IsSignaturesPresent,
+          Author: info.Author,
+          Creator: info.Creator,
+          CreationDate: info.CreationDate,
+          ModDate: info.ModDate,
+          Producer: info.Producer,
+        });
+      } catch (error) {
+        console.error("Error extracting PDF metadata:", error);
+      }
     };
     reader.readAsArrayBuffer(file);
   };
