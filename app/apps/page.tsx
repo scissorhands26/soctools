@@ -34,6 +34,13 @@ export default function AppsPage() {
       tags: ["File", "Metadata", "Hash", "Client-Side"],
       icon: ShieldIcon,
     },
+    {
+      name: "PDF Extractor",
+      description: "Extract text and images from PDF files.",
+      href: "apps/pdfextractor",
+      tags: ["PDF", "Extractor", "Text", "Image", "Client-Side"],
+      icon: ShieldIcon,
+    },
   ];
 
   return (
