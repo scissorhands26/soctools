@@ -2,6 +2,8 @@
 
 import { UploadIcon } from "lucide-react";
 import { useState, ChangeEvent, DragEvent } from "react";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface FileMetadata {
   name: string;
@@ -61,11 +63,11 @@ export default function FileExaminer() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <div
         onDragOver={(event) => event.preventDefault()}
         onDrop={handleDrop}
-        className="w-full max-w-md p-8 bg-slate-950 rounded-lg shadow-md border border-slate-900 flex flex-col items-center justify-center"
+        className="w-full bg-slate-950 rounded-lg p-4 shadow-md border border-slate-900 flex flex-col items-center justify-center"
       >
         <input
           type="file"
@@ -80,7 +82,7 @@ export default function FileExaminer() {
           {file ? (
             <div className="w-full">
               <h2 className="text-2xl font-bold mb-4">File Metadata</h2>
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                   <p className="text-gray-300 font-medium">Name:</p>
                   <p className="text-white">{fileMetadata?.name}</p>
@@ -94,7 +96,7 @@ export default function FileExaminer() {
                 </div>
                 <div>
                   <p className="text-gray-300 font-medium">Type:</p>
-                  <p className="text-white">
+                  <p className="text-white break-all">
                     {fileMetadata?.type ? fileMetadata?.type : "Unknown"}
                   </p>
                 </div>
@@ -103,7 +105,7 @@ export default function FileExaminer() {
                   <p className="text-white">{fileMetadata?.lastModified}</p>
                 </div>
               </div>
-              <div>
+              <div className="grid gap-4">
                 <div>
                   <p className="text-gray-300 font-medium">SHA1:</p>
                   <p className="text-white break-all">{fileMetadata?.sha1}</p>
@@ -116,12 +118,20 @@ export default function FileExaminer() {
                   <p className="text-gray-300 font-medium">SHA512:</p>
                   <p className="text-white break-all">{fileMetadata?.sha512}</p>
                 </div>
+                <div>
+                  <Link
+                    target="_blank"
+                    href={`https://www.virustotal.com/gui/file/${fileMetadata?.sha256}`}
+                  >
+                    <Button>Check Virus Total</Button>
+                  </Link>
+                </div>
               </div>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center">
               <UploadIcon className="h-12 w-12 text-gray-400 mb-4" />
-              <p className="text-gray-300 font-medium">
+              <p className="text-gray-300 font-medium text-center">
                 Drag and drop a file here or click to browse
               </p>
             </div>
