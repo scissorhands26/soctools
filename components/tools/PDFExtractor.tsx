@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
+// @ts-ignore
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist/legacy/build/pdf";
 
 GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.js";
