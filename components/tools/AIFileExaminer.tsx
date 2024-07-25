@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import OpenAI from "openai";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -166,15 +166,19 @@ function analysisReducer(
 }
 
 export default function FileSecurityAnalyzer() {
-  const [apiKey, setApiKey] = useState<string>(
-    localStorage.getItem("apiKey") || ""
-  );
+  const [apiKey, setApiKey] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [analysisResult, dispatch] = useReducer(analysisReducer, []);
   const [loading, setLoading] = useState<boolean>(false);
-  const [saveApiKey, setSaveApiKey] = useState<boolean>(
-    !!localStorage.getItem("apiKey")
-  );
+  const [saveApiKey, setSaveApiKey] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedApiKey = localStorage.getItem("apiKey");
+    if (storedApiKey) {
+      setApiKey(storedApiKey);
+      setSaveApiKey(true);
+    }
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
