@@ -41,6 +41,14 @@ export default function AppsPage() {
       tags: ["PDF", "Extractor", "Text", "Image", "Client-Side"],
       icon: ShieldIcon,
     },
+    {
+      name: "AI File Examiner",
+      description:
+        "Analyze files for security issues using OpenAI's GPT-4o-mini engine.",
+      href: "apps/aifileexaminer",
+      tags: ["AI", "File", "Analysis", "Security", "Server-Side"],
+      icon: ShieldIcon,
+    },
   ];
 
   return (
