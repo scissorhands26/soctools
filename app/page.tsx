@@ -9,12 +9,9 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import {
-  BoltIcon,
   BookOpenIcon,
   FileTextIcon,
-  MenuIcon,
   ShieldIcon,
-  TargetIcon,
   VideoIcon,
 } from "lucide-react";
 import { HomeChart } from "@/components/HomeChart";
