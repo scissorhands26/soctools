@@ -23,28 +23,28 @@ export default function HomePage() {
         <section id="hero" className="bg-black py-12 md:py-24 lg:py-32">
           <div className="container grid gap-8 md:grid-cols-2 items-center">
             <div className="space-y-4">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Empower Your SOC with Our Tools and Links
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                Empower Your SOC with SOC Pulse
               </h1>
               <p className="text-muted-foreground md:text-xl">
-                Discover a curated collection of web applications and resources
-                designed to streamline your security operations center
-                workflows.
+                SOC Pulse is an Incident Response Ticketing Framework seamlessly
+                integrating with Wazuh, designed to streamline your security
+                operations.
               </p>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Link
-                  href="apps"
+                  href="/socpulse"
                   className="inline-flex h-10 items-center justify-center rounded-md bg-primary-foreground px-6 py-2 text-sm font-medium text-primary shadow transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
-                  Explore Apps
+                  Explore SOC Pulse
                 </Link>
                 <Link
-                  href="#"
+                  href="/apps"
                   className="inline-flex h-10 items-center justify-center rounded-md border border-primary-foreground bg-primary px-6 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
-                  Learn More
+                  SOC Tools
                 </Link>
               </div>
             </div>
@@ -53,16 +53,16 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        {/* <section id="features" className="py-12 md:py-24 lg:py-32">
+        <section id="features" className="py-12 md:py-24 lg:py-32">
           <div className="container space-y-12">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Key Features
+                  Key Features of SOC Pulse
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Our toolkit provides a comprehensive set of tools and
-                  resources to streamline your security operations.
+                  SOC Pulse offers a robust set of features designed to enhance
+                  and streamline your security operations.
                 </p>
               </div>
             </div>
@@ -70,35 +70,27 @@ export default function HomePage() {
               <div className="grid gap-1">
                 <h3 className="text-lg font-bold">Incident Response</h3>
                 <p className="text-sm text-muted-foreground">
-                  Access a suite of tools to quickly respond to security
-                  incidents, including incident management, threat intelligence,
+                  Utilize a comprehensive suite of tools for rapid incident
+                  response, including incident management, threat intelligence,
                   and forensic analysis.
                 </p>
               </div>
               <div className="grid gap-1">
                 <h3 className="text-lg font-bold">Threat Hunting</h3>
                 <p className="text-sm text-muted-foreground">
-                  Leverage advanced threat hunting capabilities to proactively
-                  identify and mitigate potential security threats.
+                  Employ advanced threat hunting capabilities to proactively
+                  detect and neutralize potential security threats.
                 </p>
               </div>
               <div className="grid gap-1">
                 <h3 className="text-lg font-bold">Automation</h3>
                 <p className="text-sm text-muted-foreground">
-                  Streamline your security operations with automated workflows,
-                  reducing manual effort and improving efficiency.
+                  Enhance efficiency and reduce manual effort with support for
+                  AI features. Deploy your own local AI, or use cloud compute.
                 </p>
               </div>
               <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Compliance</h3>
-                <p className="text-sm text-muted-foreground">
-                  Ensure your organization's security practices align with
-                  industry standards and regulations with our compliance tools
-                  and resources.
-                </p>
-              </div>
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Reporting</h3>
+                <h3 className="text-lg font-bold">Reporting & Dashboards</h3>
                 <p className="text-sm text-muted-foreground">
                   Generate comprehensive reports and dashboards to track your
                   security posture, identify trends, and communicate with
@@ -106,16 +98,22 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Knowledge Base</h3>
+                <h3 className="text-lg font-bold">Case Management</h3>
                 <p className="text-sm text-muted-foreground">
-                  Access a curated knowledge base of security best practices,
-                  tutorials, and industry insights to continuously improve your
-                  security operations.
+                  Manage and assign incident response tickets with ease,
+                  ensuring efficient handling and resolution of security events.
+                </p>
+              </div>
+              <div className="grid gap-1">
+                <h3 className="text-lg font-bold">Chat with Analysts</h3>
+                <p className="text-sm text-muted-foreground">
+                  Communicate with your team in real-time to collaborate on
+                  incidents and streamline the response process.
                 </p>
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
         <section id="apps" className="bg-slate-900 py-12 md:py-24 lg:py-32">
           <div className="container space-y-12">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">

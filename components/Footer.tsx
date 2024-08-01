@@ -13,7 +13,11 @@ export default function Footer() {
           <Link href="#" className="text-sm hover:underline" prefetch={false}>
             Terms
           </Link>
-          <Link href="#" className="text-sm hover:underline" prefetch={false}>
+          <Link
+            href="/contact"
+            className="text-sm hover:underline"
+            prefetch={false}
+          >
             Contact
           </Link>
         </nav>
