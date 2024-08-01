@@ -142,7 +142,7 @@ export default function SOCPulsePage() {
                   <CardTitle>Real-time Alerts</CardTitle>
                   <CardDescription>
                     Get real-time alerts from Wazuh and manage them efficiently
-                    with SOC Pulse's incident response features.
+                    with SOC Pulse&apos;s incident response features.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
