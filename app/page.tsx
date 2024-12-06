@@ -24,27 +24,20 @@ export default function HomePage() {
           <div className="container grid gap-8 md:grid-cols-2 items-center">
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                Empower Your SOC with SOC Pulse
+                Work Smarter, Not Harder with SOC Tools
               </h1>
               <p className="text-muted-foreground md:text-xl">
-                SOC Pulse is an Incident Response Ticketing Framework seamlessly
-                integrating with Wazuh, designed to streamline your security
-                operations.
+                A collection of web-based tools designed to help security
+                analysts investigate files, analyze data, and streamline their
+                daily operations.
               </p>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Link
-                  href="/socpulse"
+                  href="/apps"
                   className="inline-flex h-10 items-center justify-center rounded-md bg-primary-foreground px-6 py-2 text-sm font-medium text-primary shadow transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
-                  Explore SOC Pulse
-                </Link>
-                <Link
-                  href="/apps"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-primary-foreground bg-primary px-6 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
-                  SOC Tools
+                  Browse Tools
                 </Link>
               </div>
             </div>
@@ -58,57 +51,34 @@ export default function HomePage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Key Features of SOC Pulse
+                  Tool Categories
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  SOC Pulse offers a robust set of features designed to enhance
-                  and streamline your security operations.
+                  Our tools are designed to help security analysts with various
+                  aspects of their work.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:max-w-7xl lg:grid-cols-3">
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Incident Response</h3>
+              <div className="grid gap-1 bg-slate-900 p-4 rounded-lg border border-slate-800">
+                <h3 className="text-lg font-bold">File Analysis</h3>
                 <p className="text-sm text-muted-foreground">
-                  Utilize a comprehensive suite of tools for rapid incident
-                  response, including incident management, threat intelligence,
-                  and forensic analysis.
+                  Tools for examining files, extracting metadata, and analyzing
+                  content for security concerns.
                 </p>
               </div>
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Threat Hunting</h3>
+              <div className="grid gap-1 bg-slate-900 p-4 rounded-lg border border-slate-800">
+                <h3 className="text-lg font-bold">Document Inspection</h3>
                 <p className="text-sm text-muted-foreground">
-                  Employ advanced threat hunting capabilities to proactively
-                  detect and neutralize potential security threats.
+                  Specialized tools for analyzing documents like PDFs and
+                  PowerPoint files for sensitive information.
                 </p>
               </div>
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Automation</h3>
+              <div className="grid gap-1 bg-slate-900 p-4 rounded-lg border border-slate-800">
+                <h3 className="text-lg font-bold">Data Analysis</h3>
                 <p className="text-sm text-muted-foreground">
-                  Enhance efficiency and reduce manual effort with support for
-                  AI features. Deploy your own local AI, or use cloud compute.
-                </p>
-              </div>
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Reporting & Dashboards</h3>
-                <p className="text-sm text-muted-foreground">
-                  Generate comprehensive reports and dashboards to track your
-                  security posture, identify trends, and communicate with
-                  stakeholders.
-                </p>
-              </div>
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Case Management</h3>
-                <p className="text-sm text-muted-foreground">
-                  Manage and assign incident response tickets with ease,
-                  ensuring efficient handling and resolution of security events.
-                </p>
-              </div>
-              <div className="grid gap-1">
-                <h3 className="text-lg font-bold">Chat with Analysts</h3>
-                <p className="text-sm text-muted-foreground">
-                  Communicate with your team in real-time to collaborate on
-                  incidents and streamline the response process.
+                  Tools to help analyze and visualize security-related data and
+                  metrics.
                 </p>
               </div>
             </div>
@@ -119,11 +89,11 @@ export default function HomePage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Featured Web Apps
+                  Top Tools
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Explore our collection of web applications designed to
-                  streamline your security operations.
+                  Start using our collection of security analysis tools right
+                  away.
                 </p>
               </div>
             </div>
@@ -201,54 +171,15 @@ export default function HomePage() {
                   </Link>
                 </CardFooter>
               </Card>
-              {/* <Card>
-                <CardHeader>
-                  <CardTitle>Threat Intelligence Hub</CardTitle>
-                  <CardDescription>
-                    A centralized platform for aggregating and analyzing threat
-                    intelligence data.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <TargetIcon className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-medium">Threat Hunting</span>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Link
-                    href="#"
-                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
-                  >
-                    Launch App
-                  </Link>
-                </CardFooter>
-              </Card> */}
-              {/* <Card>
-                <CardHeader>
-                  <CardTitle>Security Automation Toolkit</CardTitle>
-                  <CardDescription>
-                    A suite of tools to automate security workflows and
-                    streamline your operations.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <BoltIcon className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-medium">Automation</span>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Link
-                    href="#"
-                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
-                  >
-                    Launch App
-                  </Link>
-                </CardFooter>
-              </Card> */}
+            </div>
+            <div className="flex justify-center">
+              <Link
+                href="/apps"
+                className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                prefetch={false}
+              >
+                View All the Apps
+              </Link>
             </div>
           </div>
         </section>
