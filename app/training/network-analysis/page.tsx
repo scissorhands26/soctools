@@ -87,14 +87,14 @@ export default function NetworkAnalysisCoursePage() {
                   <h2 className="text-2xl font-bold">Course Overview</h2>
                   <p className="text-muted-foreground">
                     This course will teach you the essential skills needed for
-                    network traffic analysis and security monitoring. You'll
-                    learn how to use common tools, interpret network protocols,
-                    and identify suspicious network behavior.
+                    network traffic analysis and security monitoring.
+                    You&apos;ll learn how to use common tools, interpret network
+                    protocols, and identify suspicious network behavior.
                   </p>
                 </div>
 
                 <div className="space-y-4">
-                  <h2 className="text-2xl font-bold">What You'll Learn</h2>
+                  <h2 className="text-2xl font-bold">What You&apos;ll Learn</h2>
                   <div className="grid gap-4">
                     <div className="flex items-start gap-2">
                       <CheckCircleIcon className="w-5 h-5 mt-1 text-primary" />
