@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import JSZip from "jszip";
 import xmljs from "xml-js";
-import * as XLSX from "xlsx"; // To process Excel files
+import * as XLSX from "xlsx";
 
 interface SearchResult {
   text: string;
@@ -506,7 +506,7 @@ export default function DocxSearchApp() {
                 </div>
               </CardContent>
             </Card>
-            <hr /> {/* Separator between results */}
+            <hr />
           </>
         ))}
       </div>

@@ -1,10 +1,13 @@
+//@ts-nocheck
+
 "use client";
 
 import { useState, ChangeEvent } from "react";
-// @ts-ignore
-import { getDocument, GlobalWorkerOptions } from "pdfjs-dist/legacy/build/pdf";
+import { getDocument } from "pdfjs-dist";
+import { GlobalWorkerOptions } from "pdfjs-dist/build/pdf";
 
-GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.js";
+// Set the worker source
+GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${getDocument.version}/pdf.worker.js`;
 
 interface PDFMetadata {
   PDFFormatVersion?: string;
