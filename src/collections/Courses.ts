@@ -19,11 +19,32 @@ export const Courses: CollectionConfig = {
       required: true,
     },
     {
-      name: 'courseDescription',
-      type: 'richText',
+      name: 'slug',
+      type: 'text',
       admin: {
         position: 'sidebar',
       },
+      hooks: {
+        beforeValidate: [
+          ({ data }) => {
+            // If no slug is provided, generate one from courseTitle
+            if (!data?.slug && data?.courseTitle) {
+              return data.courseTitle
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters
+                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                .concat('-', Math.floor(Math.random() * 1000).toString()) // Add random number for uniqueness
+            }
+            return data?.slug
+          },
+        ],
+      },
+      unique: true, // Ensure slugs are unique
+      index: true, // Add database index for faster queries
+    },
+    {
+      name: 'courseDescription',
+      type: 'richText',
     },
     {
       name: 'courseLevel',

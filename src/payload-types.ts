@@ -182,6 +182,7 @@ export interface Tool {
 export interface Course {
   id: number;
   courseTitle: string;
+  slug?: string | null;
   courseDescription?: {
     root: {
       type: string;
@@ -236,6 +237,7 @@ export interface Topic {
 export interface Module {
   id: number;
   moduleTitle: string;
+  slug?: string | null;
   moduleDescription?: {
     root: {
       type: string;
@@ -297,6 +299,7 @@ export interface Skill {
 export interface Lesson {
   id: number;
   lessonTitle: string;
+  slug?: string | null;
   lessonContent: {
     root: {
       type: string;
@@ -425,6 +428,9 @@ export interface Submission {
  */
 export interface SubmissionAnswer {
   id: number;
+  submission: number | Submission;
+  question: number | Question;
+  answer?: (number | null) | Answer;
   userAnswerText?: {
     root: {
       type: string;
@@ -836,6 +842,7 @@ export interface ToolsSelect<T extends boolean = true> {
  */
 export interface CoursesSelect<T extends boolean = true> {
   courseTitle?: T;
+  slug?: T;
   courseDescription?: T;
   courseLevel?: T;
   topic?: T;
@@ -860,6 +867,7 @@ export interface TopicsSelect<T extends boolean = true> {
  */
 export interface ModulesSelect<T extends boolean = true> {
   moduleTitle?: T;
+  slug?: T;
   moduleDescription?: T;
   orderIndex?: T;
   course?: T;
@@ -880,6 +888,7 @@ export interface ModulesSelect<T extends boolean = true> {
  */
 export interface LessonsSelect<T extends boolean = true> {
   lessonTitle?: T;
+  slug?: T;
   lessonContent?: T;
   lessonType?: T;
   orderIndex?: T;
@@ -947,6 +956,9 @@ export interface SubmissionsSelect<T extends boolean = true> {
  * via the `definition` "submission_answers_select".
  */
 export interface SubmissionAnswersSelect<T extends boolean = true> {
+  submission?: T;
+  question?: T;
+  answer?: T;
   userAnswerText?: T;
   updatedAt?: T;
   createdAt?: T;

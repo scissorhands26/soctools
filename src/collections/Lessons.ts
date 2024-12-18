@@ -5,15 +5,42 @@ export const Lessons: CollectionConfig = {
   slug: 'lessons',
   access: {
     read: () => true,
-    create: ({ req: { user } }) => ['admin', 'instructor'].includes(user?.role),
-    update: ({ req: { user } }) => ['admin', 'instructor'].includes(user?.role),
-    delete: ({ req: { user } }) => ['admin', 'instructor'].includes(user?.role),
+    create: ({ req: { user } }) =>
+      Boolean(user?.role && ['admin', 'instructor'].includes(user.role)),
+    update: ({ req: { user } }) =>
+      Boolean(user?.role && ['admin', 'instructor'].includes(user.role)),
+    delete: ({ req: { user } }) =>
+      Boolean(user?.role && ['admin', 'instructor'].includes(user.role)),
   },
   fields: [
     {
       name: 'lessonTitle',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ data }) => {
+            // If no slug is provided, generate one from lessonTitle
+            if (!data?.slug && data?.lessonTitle) {
+              return data.lessonTitle
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters
+                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                .concat('-', Math.floor(Math.random() * 1000).toString()) // Add random number for uniqueness
+            }
+            return data?.slug
+          },
+        ],
+      },
+      unique: true, // Ensure slugs are unique
+      index: true, // Add database index for faster queries
     },
     {
       name: 'lessonContent',
