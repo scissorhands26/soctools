@@ -15,6 +15,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.8.0",
     "@payloadcms/db-sqlite": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/payload-cloud": "latest",
