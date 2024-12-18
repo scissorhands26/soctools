@@ -1,8 +1,8 @@
-"use client";
-import { MenuIcon, ShieldIcon } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-import { Button } from "./ui/button";
+'use client'
+import { MenuIcon, ShieldIcon } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+import { Button } from './ui/button'
 
 export default function NavBar() {
   return (
@@ -27,19 +27,15 @@ export default function NavBar() {
           >
             Apps
           </Link> */}
-          <Link
-            href="#"
-            className="text-sm font-medium hover:underline"
-            prefetch={false}
-          >
+          <Link href="#" className="text-sm font-medium hover:underline" prefetch={false}>
             Resources
           </Link>
           <Link
-            href="/apps"
+            href="/tools"
             className="inline-flex h-9 items-center justify-center rounded-md bg-primary-foreground px-4 py-2 text-sm font-medium text-primary shadow transition-colors hover:bg-slate-950 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             prefetch={false}
           >
-            Apps
+            Tools
           </Link>
         </nav>
         <Button variant="ghost" size="icon" className="md:hidden">
@@ -48,5 +44,5 @@ export default function NavBar() {
         </Button>
       </div>
     </header>
-  );
+  )
 }

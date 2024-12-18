@@ -1,14 +1,8 @@
-import createMDX from "@next/mdx";
+import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  experimental: { mdxRs: true },
-};
+  // Your Next.js config here
+}
 
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-});
-
-// Merge MDX config with Next.js config
-export default withMDX(nextConfig);
+export default withPayload(nextConfig)
