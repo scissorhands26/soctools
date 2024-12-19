@@ -10,7 +10,6 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { BookOpen, Trophy, ArrowLeft, FileText, Video, Code, Link as LinkIcon } from 'lucide-react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -70,21 +69,21 @@ export default async function ModulePage({ params }: Props) {
     notFound()
   }
 
-  const module = modules[0]
+  const courseModule = modules[0]
 
   // Get lessons for this module
   const { docs: lessons } = await payload.find({
     collection: 'lessons',
     where: {
       module: {
-        equals: module.id,
+        equals: courseModule.id,
       },
     },
     sort: 'orderIndex',
   })
 
   // Calculate total XP for this module
-  const totalXP = module.skillsXP?.reduce((total, skillXP) => total + skillXP.xp, 0) || 0
+  const totalXP = courseModule.skillsXP?.reduce((total, skillXP) => total + skillXP.xp, 0) || 0
 
   return (
     <div className="flex flex-col min-h-[100dvh]">
@@ -105,10 +104,10 @@ export default async function ModulePage({ params }: Props) {
               {/* Module Info */}
               <div className="flex flex-col items-start space-y-4">
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
-                  {module.moduleTitle}
+                  {courseModule.moduleTitle}
                 </h1>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  {module.moduleDescription?.root?.children?.[0]?.text ||
+                  {courseModule.moduleDescription?.root?.children?.[0]?.text ||
                     'No description available'}
                 </p>
                 <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
@@ -122,7 +121,7 @@ export default async function ModulePage({ params }: Props) {
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {module.skillsXP?.map((skillXP) => (
+                  {courseModule.skillsXP?.map((skillXP) => (
                     <Badge key={skillXP.id} variant="secondary">
                       {typeof skillXP.skill === 'object' ? skillXP.skill.name : ''} +{skillXP.xp}XP
                     </Badge>
@@ -182,7 +181,7 @@ export default async function ModulePage({ params }: Props) {
                     )}
                     <CardFooter>
                       <Link
-                        href={`/training/course/${course.slug}/module/${module.slug}/lesson/${lesson.slug}`}
+                        href={`/training/course/${course.slug}/module/${courseModule.slug}/lesson/${lesson.slug}`}
                         className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                       >
                         Start Lesson
