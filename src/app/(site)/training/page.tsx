@@ -53,8 +53,10 @@ export default async function TrainingPage() {
                       <CardTitle>{course.courseTitle}</CardTitle>
                     </div>
                     <CardDescription>
-                      {course.courseDescription?.root?.children?.[0]?.text ||
-                        'No description available'}
+                      {(
+                        course.courseDescription?.root?.children?.[0]?.text ||
+                        'No description available'
+                      ).toString()}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
