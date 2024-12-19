@@ -107,7 +107,7 @@ export default async function ModulePage({ params }: Props) {
                   {courseModule.moduleTitle}
                 </h1>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  {courseModule.moduleDescription?.root?.children?.[0]?.text ||
+                  {(courseModule.moduleDescription?.root?.children?.[0]?.text as string) ||
                     'No description available'}
                 </p>
                 <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
