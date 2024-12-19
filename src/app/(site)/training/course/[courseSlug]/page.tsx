@@ -77,7 +77,8 @@ export default async function CoursePage({ params }: Props) {
                 {course.courseTitle}
               </h1>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {course.courseDescription?.root?.children?.[0]?.text || 'No description available'}
+                {(course.courseDescription?.root?.children?.[0]?.text as string) ||
+                  'No description available'}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
@@ -114,7 +115,7 @@ export default async function CoursePage({ params }: Props) {
                             Module {index + 1}: {module.moduleTitle}
                           </CardTitle>
                           <CardDescription>
-                            {module.moduleDescription?.root?.children?.[0]?.text ||
+                            {(module.moduleDescription?.root?.children?.[0]?.text as string) ||
                               'No description available'}
                           </CardDescription>
                         </div>
