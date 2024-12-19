@@ -6,8 +6,10 @@ export const DiscussionThreads: CollectionConfig = {
   access: {
     read: () => true,
     create: ({ req: { user } }) => !!user,
-    update: ({ req: { user } }) => ['admin', 'instructor'].includes(user?.role),
-    delete: ({ req: { user } }) => ['admin', 'instructor'].includes(user?.role),
+    update: ({ req: { user } }) =>
+      Boolean(user?.role && ['admin', 'instructor'].includes(user.role)),
+    delete: ({ req: { user } }) =>
+      Boolean(user?.role && ['admin', 'instructor'].includes(user.role)),
   },
   fields: [
     {
