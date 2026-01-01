@@ -39,7 +39,7 @@
     "jszip": "^3.10.1",
     "jzip": "^1.0.0",
     "lucide-react": "^0.468.0",
-    "next": "15.1.1",
+    "next": "15.1.11",
     "openai": "^4.77.0",
     "payload": "latest",
     "pdfjs-dist": "^4.9.155",
