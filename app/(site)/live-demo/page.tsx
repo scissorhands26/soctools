@@ -566,9 +566,11 @@ export default function HomePage() {
                                     <h3 className="font-semibold">
                                       Parsed Markdown
                                     </h3>
-                                    <ReactMarkdown className="bg-muted p-4 rounded-md text-sm text-wrap">
-                                      {JSON.parse(markdownResponse).content}
-                                    </ReactMarkdown>
+                                    <div className="bg-muted p-4 rounded-md text-sm text-wrap">
+                                      <ReactMarkdown>
+                                        {JSON.parse(markdownResponse).content}
+                                      </ReactMarkdown>
+                                    </div>
                                   </div>
                                 )}
                                 <div className="mt-4 space-y-2">
