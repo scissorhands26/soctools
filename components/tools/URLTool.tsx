@@ -408,18 +408,18 @@ export function URLTool() {
   return (
     <div className="space-y-6">
       <Tabs defaultValue="decoder" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="decoder">URL Decoder</TabsTrigger>
-          <TabsTrigger value="encoder">URL Encoder</TabsTrigger>
-          <TabsTrigger value="security">Security Analysis</TabsTrigger>
-          <TabsTrigger value="beautifier">URL Beautifier</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-slate-900/50 border-slate-800">
+          <TabsTrigger value="decoder" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">URL Decoder</TabsTrigger>
+          <TabsTrigger value="encoder" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">URL Encoder</TabsTrigger>
+          <TabsTrigger value="security" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">Security Analysis</TabsTrigger>
+          <TabsTrigger value="beautifier" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">URL Beautifier</TabsTrigger>
         </TabsList>
 
         <TabsContent value="decoder">
-          <Card>
+          <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>Enter URL</CardTitle>
-              <CardDescription>
+              <CardDescription className="text-gray-400">
                 Enter a URL to decode and analyze its components
               </CardDescription>
             </CardHeader>
@@ -429,17 +429,22 @@ export function URLTool() {
                   placeholder="Enter URL (e.g., https://example.com?param=value)"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  className="flex-1"
+                  className="flex-1 bg-slate-900/50 border-slate-800 text-white placeholder:text-gray-500"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      parseURL();
+                    }
+                  }}
                 />
-                <Button onClick={parseURL}>Decode</Button>
+                <Button onClick={parseURL} className="bg-primary hover:bg-primary/90">Decode</Button>
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-md p-2">{error}</p>}
             </CardContent>
           </Card>
 
           {parsedURL && (
             <div className="grid gap-6 md:grid-cols-2 mt-6">
-              <Card>
+              <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle>URL Components</CardTitle>
                 </CardHeader>
@@ -483,7 +488,7 @@ export function URLTool() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle>Query Parameters</CardTitle>
                 </CardHeader>
@@ -518,7 +523,7 @@ export function URLTool() {
                 </CardContent>
               </Card>
 
-              <Card className="md:col-span-2">
+              <Card className="md:col-span-2 border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle>Decoded URL</CardTitle>
                 </CardHeader>
@@ -553,10 +558,10 @@ export function URLTool() {
         </TabsContent>
 
         <TabsContent value="encoder">
-          <Card>
+          <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>URL Encoder</CardTitle>
-              <CardDescription>
+              <CardDescription className="text-gray-400">
                 Build and encode a URL with parameters
               </CardDescription>
             </CardHeader>
@@ -610,7 +615,7 @@ export function URLTool() {
                   Encode URL
                 </Button>
 
-                {error && <p className="text-sm text-red-500">{error}</p>}
+                {error && <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-md p-2">{error}</p>}
 
                 {encodedUrl && (
                   <div className="space-y-2">
@@ -648,7 +653,7 @@ export function URLTool() {
         <TabsContent value="security">
           {urlAnalysis && parameterAnalysis ? (
             <div className="grid gap-6 md:grid-cols-2">
-              <Card>
+              <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <ShieldCheckIcon className="w-5 h-5 text-primary" />
@@ -714,7 +719,7 @@ export function URLTool() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <AlertCircleIcon className="w-5 h-5 text-primary" />
@@ -804,9 +809,9 @@ export function URLTool() {
               </Card>
             </div>
           ) : (
-            <Card>
+            <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
               <CardContent className="py-8">
-                <div className="text-center text-muted-foreground">
+                <div className="text-center text-gray-400">
                   Enter a URL in the decoder tab to see security analysis
                 </div>
               </CardContent>
@@ -815,13 +820,13 @@ export function URLTool() {
         </TabsContent>
 
         <TabsContent value="beautifier">
-          <Card>
+          <Card className="border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm">
             <CardHeader>
               <div className="flex items-center gap-2">
                 <Code2Icon className="w-5 h-5 text-primary" />
                 <CardTitle>URL Beautifier</CardTitle>
               </div>
-              <CardDescription>
+              <CardDescription className="text-gray-400">
                 Format and beautify URLs for better readability
               </CardDescription>
             </CardHeader>

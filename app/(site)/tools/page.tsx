@@ -17,7 +17,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ShieldIcon, LinkIcon } from "lucide-react";
+import {
+  ShieldIcon,
+  LinkIcon,
+  PresentationIcon,
+  FileIcon,
+  FileCodeIcon,
+  SearchIcon,
+  ArrowRightIcon,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useState, useMemo } from "react";
 
@@ -26,7 +34,7 @@ const apps = [
     name: "PowerPoint Scanner",
     description:
       "Scan PowerPoint files for classified markings, sensitive information, or a custom wordlist.",
-    href: "apps/powerpointscanner",
+    href: "/tools/powerpointscanner",
     tags: [
       "PowerPoint",
       "Scanner",
@@ -34,27 +42,27 @@ const apps = [
       "Classification",
       "Client-Side",
     ],
-    icon: ShieldIcon,
+    icon: PresentationIcon,
   },
   {
     name: "File Examiner",
     description: "Examine files for metadata, hashes, and other information.",
-    href: "apps/fileexaminer",
+    href: "/tools/fileexaminer",
     tags: ["File", "Metadata", "Hash", "Client-Side"],
-    icon: ShieldIcon,
+    icon: FileIcon,
   },
   {
     name: "PDF Extractor",
     description: "Extract text and images from PDF files.",
-    href: "apps/pdfextractor",
+    href: "/tools/pdfextractor",
     tags: ["PDF", "Extractor", "Text", "Image", "Client-Side"],
-    icon: ShieldIcon,
+    icon: FileCodeIcon,
   },
   {
     name: "AI File Examiner",
     description:
       "Analyze files for security issues using OpenAI's GPT-4-mini engine.",
-    href: "apps/aifileexaminer",
+    href: "/tools/aifileexaminer",
     tags: ["AI", "File", "Analysis", "Security", "Server-Side"],
     icon: ShieldIcon,
   },
@@ -62,7 +70,7 @@ const apps = [
     name: "URL Tool",
     description:
       "Encode and decode URLs. Analyze URL structure, query parameters, and encoded values.",
-    href: "apps/urltool",
+    href: "/tools/urltool",
     tags: [
       "URL",
       "Encoder",
@@ -106,76 +114,112 @@ export default function AppsPage() {
   }, [searchQuery, sortBy]);
 
   return (
-    <div className="min-h-screen bg-black">
-      <div className="container mx-auto py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">Security Tools</h1>
-
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <Input
-              placeholder="Search tools..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full"
-            />
-          </div>
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-full md:w-[180px]">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="name">Name (A-Z)</SelectItem>
-              <SelectItem value="name-desc">Name (Z-A)</SelectItem>
-              <SelectItem value="tags">Tags (Least)</SelectItem>
-              <SelectItem value="tags-desc">Tags (Most)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredAndSortedApps.length > 0 ? (
-            filteredAndSortedApps.map((app) => (
-              <Card key={app.href} className="flex flex-col">
-                <CardHeader>
-                  <CardTitle>{app.name}</CardTitle>
-                  <CardDescription>{app.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <div className="flex items-center gap-2">
-                    {React.createElement(app.icon)}
-                    <span className="text-sm font-medium">{app.name}</span>
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {app.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="secondary"
-                        className="cursor-pointer hover:bg-secondary/80"
-                        onClick={() => setSearchQuery(tag)}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Link
-                    href={app.href}
-                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
-                  >
-                    Launch App
-                  </Link>
-                </CardFooter>
-              </Card>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-8 text-muted-foreground">
-              No tools found matching your search.
+    <div className="flex flex-col min-h-[100dvh]">
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-black py-16 md:py-24 lg:py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="container mx-auto relative px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-3">
+                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
+                  Security Tools
+                </h1>
+                <p className="max-w-2xl text-gray-400 text-lg md:text-xl leading-relaxed">
+                  A comprehensive collection of security analysis tools to help you investigate files, analyze data, and streamline your operations.
+                </p>
+              </div>
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        </section>
+
+        {/* Tools Section */}
+        <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-black to-slate-950">
+          <div className="container mx-auto space-y-12 px-4 sm:px-6 lg:px-8">
+            {/* Search and Filter */}
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="relative flex-1">
+                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Input
+                  placeholder="Search tools..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-slate-900/50 border-slate-800 text-white placeholder:text-gray-500 focus:border-primary/50"
+                />
+              </div>
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-full md:w-[180px] bg-slate-900/50 border-slate-800 text-white">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent className="bg-slate-900 border-slate-800">
+                  <SelectItem value="name">Name (A-Z)</SelectItem>
+                  <SelectItem value="name-desc">Name (Z-A)</SelectItem>
+                  <SelectItem value="tags">Tags (Least)</SelectItem>
+                  <SelectItem value="tags-desc">Tags (Most)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Tools Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredAndSortedApps.length > 0 ? (
+                filteredAndSortedApps.map((app) => {
+                  const IconComponent = app.icon;
+                  return (
+                    <Card
+                      key={app.href}
+                      className="group relative overflow-hidden border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <CardHeader className="relative">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
+                          <IconComponent className="w-5 h-5 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">{app.name}</CardTitle>
+                        <CardDescription className="text-gray-400">
+                          {app.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="relative">
+                        <div className="flex flex-wrap gap-2">
+                          {app.tags.map((tag) => (
+                            <Badge
+                              key={tag}
+                              variant="secondary"
+                              className="cursor-pointer hover:bg-primary/20 hover:text-primary transition-colors bg-slate-800/50 border-slate-700 text-gray-300"
+                              onClick={() => setSearchQuery(tag)}
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </CardContent>
+                      <CardFooter className="relative">
+                        <Link
+                          href={app.href}
+                          className="group/btn inline-flex h-10 items-center justify-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 w-full"
+                          prefetch={false}
+                        >
+                          Launch App
+                          <ArrowRightIcon className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                        </Link>
+                      </CardFooter>
+                    </Card>
+                  );
+                })
+              ) : (
+                <div className="col-span-full text-center py-12">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-900/50 border border-slate-800 mb-4">
+                    <SearchIcon className="w-8 h-8 text-gray-500" />
+                  </div>
+                  <p className="text-gray-400 text-lg">No tools found matching your search.</p>
+                  <p className="text-gray-500 text-sm mt-2">Try adjusting your search terms or filters.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
